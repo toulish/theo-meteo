@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Cyprus Lockdown</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/minty/bootstrap.min.css">
+    <script>
+
+    function isApple(){
+      var uagent = navigator.userAgent.toLowerCase();
+      return uagent.search("iphone") > -1 || uagent.search("ipad") > -1 || uagent.search("macintosh") > -1 ;
+    }
+
+    function getCookie(cname) {
+	  var name = cname + "=";
+	  var decodedCookie = decodeURIComponent(document.cookie);
+	  var ca = decodedCookie.split(';');
+	  for(var i = 0; i <ca.length; i++) {
+	    var c = ca[i];
+	    while (c.charAt(0) == ' ') {
+	      c = c.substring(1);
+	    }
+	    if (c.indexOf(name) == 0) {
+	      return c.substring(name.length, c.length);
+	    }
+	  }
+	  return "";
+	}
+
+	function checkCookies() {
+		document.getElementById("id").value = getCookie("id");
+		document.getElementById("postcode").value = getCookie("postcode");
+	}
+
+    function createSMS() {
+      var divider = '';
+
+      if (isApple()){
+          var divider = '&';
+      }else{
+          var divider = '?';
+      };
+
+      let phone = '8998';
+      let id = document.getElementById("id").value;
+      let postcode = document.getElementById("postcode").value;
+      let selection = document.forms.myform.selection.value;
+      var message = selection + ' ' + id + ' ' + postcode;
+
+      document.cookie = "id=" + id;
+      document.cookie = "postcode=" + postcode;
+
+      var url = "sms:" + phone + divider + "body=" + encodeURIComponent(message);
+      window.location.href = url;
+    }
+    </script>
+</head>
+
+<body onload="checkCookies()">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+              <form class="form-horizontal" name="myform">
+                <fieldset>
+
+                  <!-- Form Name -->
+                  <h1>Θέλω να βγω έξω - I want to go out</h1>
+                  <div class="jumbotron">
+                  	<p>Μια απλή εφαρμογή για να δημιουργήσετε το μήνυμα εξόδου εύκολα και γρήγορα </p>
+                    <p>A simple app to create the SMS to go out easily and quickly </p>
+                  	<span class="badge badge-pill badge-primary">#ΜένουμεΣπίτι</span>
+                  </div>
+                  
+
+                  <!-- Text input-->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="id">Αρ. Ταυτότητας/Διαβατηρίου - ID Number/Passport</label>
+                    <div class="col-md-4">
+                      <input id="id" name="id" type="text" placeholder="" class="form-control input-md" required="">
+                    </div>
+                  </div>
+
+                  <!-- Text input-->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="postcode">Ταχυδρομικός Κώδικας - Postcode</label>
+                    <div class="col-md-4">
+                      <input id="postcode" name="postcode" type="text" placeholder="" class="form-control input-md">
+                    </div>
+                  </div>
+
+                  <!-- Multiple Radios -->
+                  <div class="form-group" id="selection">
+                    <label class="col-md-4 control-label" for="selection">Λόγος μετακίνησης - Reason of going out</label>
+                      <div class="col-md-4">
+                        <div class="radio">
+                          <label for="selection-0">
+                            <input type="radio" name="selection" id="selection-0" value="1" checked="checked">
+                            Φαρμακείο/Γιατρός - Pharmacy/Doctor
+                          </label>
+                        </div>
+                        <div class="radio">
+                          <label for="selection-1">
+                            <input type="radio" name="selection" id="selection-1" value="2">
+                            Υπεραγορά - Supermarket
+                          </label>
+                        </div>
+                        <div class="radio">
+                          <label for="selection-2">
+                            <input type="radio" name="selection" id="selection-2" value="3">
+                            Τράπεζα - Bank
+                          </label>
+                        </div>
+                        <div class="radio">
+                          <label for="selection-3">
+                            <input type="radio" name="selection" id="selection-3" value="4">
+                            Δημόσια Υπηρεσία - Public Service
+                          </label>
+                        </div>
+                        <div class="radio">
+                          <label for="selection-4">
+                            <input type="radio" name="selection" id="selection-4" value="5">
+                            Παροχή Βοήθειας - Provide Assistance
+                          </label>
+                        </div>
+                        <div class="radio">
+                          <label for="selection-5">
+                            <input type="radio" name="selection" id="selection-5" value="6">
+                            Σωματική άσκηση ή βόλτα με κατοικίδιο - Exercise or pet walking
+                          </label>
+                        </div>
+                        <div class="radio">
+                          <label for="selection-6">
+                            <input type="radio" name="selection" id="selection-6" value="7">
+                            Τελετή (Γάμος, βάφτιση, κηδεία) - Ceremony (wedding, cristening, funeral)
+                          </label>
+                        </div>
+                        <div class="radio">
+                        <label for="selection-7">
+                          <input type="radio" name="selection" id="selection-7" value="8">
+                          Άλλο (Συμπληρώστε λεπτομέρειες στο μήνυμα) - Other (Fill in details in the message)
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Button -->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="create"></label>
+                    <div class="col-md-4">
+                      <button id="create" name="create" class="btn btn-primary" onclick="createSMS(); return false;">Δημιουργία SMS - Create SMS</button>
+                    </div>
+                  </div>
+
+                </fieldset>
+              </form>
+            </div>
+        </div>
+        <br>
+        <br>
+	    <footer>
+	        <p>© 2020 <a href="http://www.velistar.com" target="_blank">Velistar Consulting & Solutions</a></p>
+	        <p>Αποποίηση: Δεν αποθηκεύονται δεδομένα σε κανένα διακομιστή και δεν μεταδίδονται οπουδήποτε. Αποθηκεύονται με τη χρήση cookies στη συσκευή σας μόνο.</p>
+          <p>Disclaimer: No data is stored on any server and are not transmitted anywhere. Data is only stored in cookies on your device.</p>
+	    </footer>
+    </div>
+
+</body>
+
+</html>
